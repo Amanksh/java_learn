@@ -1,0 +1,153 @@
+# SQL Practice Questions (Batch 1: Q1 - Q5)
+
+
+# Question 1: Detecting Potential Payment Fraud
+
+```sql
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY,
+    user_id INT,
+    payment_method VARCHAR(255),
+    amount DECIMAL(10,2),
+    transaction_date DATE,
+    status VARCHAR(255)
+);
+
+INSERT INTO transactions (transaction_id, user_id, payment_method, amount, transaction_date, status) VALUES
+(101, 202, 'Credit Card', 200.43, '2025-02-16', 'Completed'),
+(102, 203, 'Netbanking', 3233.10, '2025-03-11', 'Failed'),
+(103, 203, 'Netbanking', 1195.35, '2025-02-24', 'Failed'),
+(104, 203, 'Debit Card', 376.11, '2025-03-10', 'Failed'),
+(105, 203, 'Netbanking', 112.01, '2025-04-04', 'Failed'),
+(106, 203, 'Credit Card', 111.10, '2025-09-12', 'Failed'),
+(107, 203, 'Debit Card', 2344.50, '2025-10-03', 'Failed');
+```
+
+
+---
+
+
+# Question 2: Average Response Time
+
+```sql
+CREATE TABLE support_tickets (
+    id INT PRIMARY KEY,
+    customer_id INT,
+    created_at TIMESTAMP,
+    resolved_at TIMESTAMP
+);
+
+INSERT INTO support_tickets (id, customer_id, created_at, resolved_at) VALUES
+(1, 1, '2023-12-21 05:42:00', '2024-01-01 05:42:00'),
+(2, 2, '2023-07-08 14:22:00', NULL),
+(3, 3, '2023-05-22 08:54:00', '2023-06-17 08:54:00');
+```
+
+
+---
+
+
+# Question 3: Highest-Spending Customers per City
+
+```sql
+CREATE TABLE customers (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    city VARCHAR(255)
+);
+
+CREATE TABLE orders (
+    id INT PRIMARY KEY,
+    customer_id INT REFERENCES customers(id),
+    amount DECIMAL(10,2)
+);
+
+INSERT INTO customers (id, name, city) VALUES
+(1, 'Customer 1', 'Los Angeles'),
+(2, 'Customer 2', 'Chicago'),
+(3, 'Customer 3', 'Chicago');
+
+INSERT INTO orders (id, customer_id, amount) VALUES
+(1, 1, 150.75),
+(2, 2, 230.50),
+(3, 3, 345.25);
+```
+
+
+---
+
+
+# Question 4: E-commerce Product Request Report
+
+```sql
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(255),
+    is_available SMALLINT
+);
+
+CREATE TABLE requests (
+    product_id INT REFERENCES products(id),
+    client_email VARCHAR(255)
+);
+
+INSERT INTO products (id, name, category, is_available) VALUES
+(1, 'PromoPro', 'beauty products', 1),
+(2, 'AdVantage', 'outdoor gear', 1),
+(3, 'MarketMagnet', 'sports equipment', 1),
+(5, 'AdBlitz', 'beauty products', 0);
+
+INSERT INTO requests (product_id, client_email) VALUES
+(1, 'salgate1@fc2.com'),
+(1, 'lwycliff6@list-manage.com'),
+(1, 'ekimbleyf@scientificamerican.com'),
+(2, 'bgooro@spotify.com'),
+(2, 'vsamwayest@bbb.org'),
+(3, 'apappin0@yellowbook.com'),
+(3, 'ringreyb@businessinsider.com'),
+(3, 'mrysonm@istockphoto.com'),
+(5, 'ayushin1c@opera.com'),
+(5, 'bcoulston1q@hubpages.com');
+```
+
+
+---
+
+
+# Question 5: Active Campaign Engagement Report
+
+```sql
+CREATE TABLE campaigns (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    is_active SMALLINT
+);
+
+CREATE TABLE engagements (
+    campaign_id INT REFERENCES campaigns(id),
+    views INT,
+    clicks INT
+);
+
+INSERT INTO campaigns (id, name, is_active) VALUES
+(1, 'SummerSavings', 1),
+(2, 'FallFrenzy', 1),
+(3, 'WinterWonderland', 0);
+
+INSERT INTO engagements (campaign_id, views, clicks) VALUES
+(1, 100, 10),
+(1, 150, 20),
+(2, 200, 30),
+(2, 250, 40),
+(3, 300, 50),
+(1, 120, 15),
+(2, 180, 25),
+(3, 220, 35),
+(1, 130, 18),
+(2, 210, 28);
+```
+
+
+---
+
