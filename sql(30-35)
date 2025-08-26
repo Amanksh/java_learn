@@ -1,0 +1,265 @@
+# SQL Practice — Batch Questions 30–35 (Correct PDF Order)
+
+---
+
+## Q30 — Monthly Budget Report (Online Budgeting Application)
+
+```sql
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS income;
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+    id INT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE expenses (
+    customer_id INT REFERENCES customers(id),
+    dt VARCHAR(19) NOT NULL,
+    amount DECIMAL(6,2) NOT NULL
+);
+
+CREATE TABLE income (
+    customer_id INT REFERENCES customers(id),
+    dt VARCHAR(19) NOT NULL,
+    amount DECIMAL(6,2) NOT NULL
+);
+
+INSERT INTO customers (id, email) VALUES
+(1, 'otoohey0@elpais.com'),
+(2, 'egrebbin1@state.gov'),
+(3, 'arides2@sohu.com');
+
+INSERT INTO expenses (customer_id, dt, amount) VALUES
+(1, '2024-02-21 22:12:12', 90.41),
+(1, '2024-02-27 06:48:37', 792.88),
+(1, '2024-03-10 05:19:43', 442.01),
+(1, '2024-03-11 19:48:25', 327.35),
+(1, '2024-03-24 22:03:06', 639.62),
+(1, '2024-03-29 00:37:46', 150.12),
+(1, '2024-04-02 03:36:50', 257.67),
+(2, '2024-02-21 06:11:26', 400.22),
+(2, '2024-03-11 15:34:19', 298.41),
+(2, '2024-03-25 04:36:27', 376.87),
+(2, '2024-03-29 19:05:51', 530.07),
+(2, '2024-03-30 07:07:28', 287.84),
+(2, '2024-04-02 15:44:22', 868.03),
+(3, '2024-03-01 16:02:47', 33.30),
+(3, '2024-03-06 11:53:42', 838.51),
+(3, '2024-03-20 23:34:48', 968.08),
+(3, '2024-03-21 21:18:08', 35.36),
+(3, '2024-03-30 06:51:13', 956.12),
+(3, '2024-03-31 10:11:56', 896.32),
+(3, '2024-03-31 22:36:57', 740.94);
+
+INSERT INTO income (customer_id, dt, amount) VALUES
+(1, '2024-02-20 21:00:55', 366.66),
+(1, '2024-03-11 03:25:04', 769.38),
+(1, '2024-03-15 00:49:53', 84.10),
+(1, '2024-03-21 18:32:51', 839.48),
+(1, '2024-03-29 15:34:13', 333.97),
+(1, '2024-04-01 00:34:24', 253.13),
+(2, '2024-02-20 15:03:26', 822.75),
+(2, '2024-02-26 14:57:39', 277.23),
+(2, '2024-03-19 09:24:47', 24.08),
+(2, '2024-03-20 15:54:24', 988.34),
+(2, '2024-04-02 08:28:38', 990.54),
+(3, '2024-02-21 10:23:33', 430.82),
+(3, '2024-02-29 08:25:32', 482.85),
+(3, '2024-03-01 05:10:42', 962.60),
+(3, '2024-03-04 08:27:34', 30.21),
+(3, '2024-03-19 12:12:01', 80.00),
+(3, '2024-03-21 00:32:10', 674.76),
+(3, '2024-03-23 14:14:32', 863.79);
+
+DROP TABLE IF EXISTS expenses;
+DROP TABLE IF EXISTS income;
+DROP TABLE IF EXISTS customers;
+
+CREATE TABLE customers (
+    id INT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE expenses (
+    customer_id INT REFERENCES customers(id),
+    amount DECIMAL(6,2) NOT NULL
+);
+
+CREATE TABLE income (
+    customer_id INT REFERENCES customers(id),
+    amount DECIMAL(6,2) NOT NULL
+);
+
+INSERT INTO customers (id, email) VALUES
+(1, 'dtollmache0@typepad.com'),
+(2, 'eclutterbuck1@baidu.com'),
+(3, 'mdensun2@ustream.tv');
+
+INSERT INTO expenses (customer_id, amount) VALUES
+(1, 136.18), (1, 323.28), (1, 383.37), (1, 505.41), (1, 841.21),
+(2, 5.23), (2, 408.33), (2, 489.45), (2, 545.40), (2, 591.43),
+(2, 706.13), (2, 716.82), (2, 761.75), (2, 796.30),
+(3, 152.26), (3, 211.30), (3, 447.57), (3, 685.03),
+(3, 966.89), (3, 967.30);
+
+INSERT INTO income (customer_id, amount) VALUES
+(1, 39.44), (1, 49.49), (1, 292.19), (1, 419.36), (1, 529.26),
+(1, 695.43), (1, 763.72), (1, 797.92), (1, 833.34),
+(2, 139.42), (2, 422.18), (2, 506.59), (2, 566.00),
+(2, 697.92), (2, 938.51),
+(3, 304.66), (3, 345.03), (3, 371.86), (3, 371.88), (3, 552.08);
+
+
+DROP TABLE IF EXISTS sales;
+DROP TABLE IF EXISTS products;
+
+CREATE TABLE products (
+    id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE sales (
+    product_id INT REFERENCES products(id),
+    dt VARCHAR(19) NOT NULL,
+    amount DECIMAL(7,2) NOT NULL
+);
+
+INSERT INTO products (id, name) VALUES
+(1, 'Luxury Gold Watch'),
+(2, 'Smartphone Holder Stand'),
+(3, 'Stainless Steel Water Bottle');
+
+INSERT INTO sales (product_id, dt, amount) VALUES
+(1, '2024-01-13 17:12:22', 7008.16),
+(1, '2024-01-03 03:15:27', 6191.64),
+(1, '2024-01-22 18:29:09', 4527.86),
+(1, '2024-01-26 19:38:53', 7828.36),
+(1, '2024-02-17 09:27:13', 5273.16),
+(1, '2024-02-11 09:51:24', 3364.73),
+(1, '2024-02-22 23:53:15', 8584.33),
+(2, '2024-01-28 11:33:58', 3710.06),
+(2, '2024-01-25 14:47:25', 5221.02),
+(2, '2024-01-21 07:58:53', 2525.72),
+(2, '2024-03-15 14:16:18', 8158.08),
+(2, '2024-03-12 17:02:01', 6760.77),
+(3, '2024-01-13 19:27:51', 1942.79),
+(3, '2024-02-15 08:04:40', 9186.38),
+(3, '2024-03-06 08:02:37', 5821.97),
+(3, '2024-03-03 15:39:18', 8676.24);
+
+
+DROP TABLE IF EXISTS projects_employees;
+DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS projects;
+
+CREATE TABLE projects (
+    id INT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    ein VARCHAR(255) NOT NULL,
+    experience_years INT NOT NULL
+);
+
+CREATE TABLE projects_employees (
+    project_id INT REFERENCES projects(id),
+    employee_id INT REFERENCES employees(id)
+);
+
+INSERT INTO projects (id, name) VALUES
+(1, 'Project X'),
+(2, 'Sunshine Project'),
+(3, 'Blue Sky Initiative');
+
+INSERT INTO employees (id, ein, experience_years) VALUES
+(1, '62-0524667', 4),
+(2, '62-1435366', 1),
+(3, '29-3144922', 1),
+(4, '80-9606443', 1),
+(5, '63-6630813', 1);
+
+INSERT INTO projects_employees (project_id, employee_id) VALUES
+(1, 1), (1, 1), (1, 2), (1, 3), (1, 5),
+(2, 1), (2, 1), (2, 2), (2, 5),
+(3, 1), (3, 1), (3, 2), (3, 3), (3, 3),
+(3, 4), (3, 4), (3, 5), (3, 5), (3, 5), (3, 5);
+
+
+DROP TABLE IF EXISTS transactions;
+
+CREATE TABLE transactions (
+    dt VARCHAR(19) NOT NULL,
+    wallet VARCHAR(255) NOT NULL,
+    amount DECIMAL(4,2) NOT NULL
+);
+
+INSERT INTO transactions (dt, wallet, amount) VALUES
+('2024-01-31 13:42:19','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', -5.78),
+('2024-01-24 06:07:14','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', -2.79),
+('2024-01-25 06:39:19','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', -2.73),
+('2024-01-29 04:37:45','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', 4.68),
+('2024-02-28 06:20:04','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', -7.36),
+('2024-02-12 07:45:28','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', -3.71),
+('2024-02-25 10:49:54','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', -3.53),
+('2024-02-03 19:43:00','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', 4.01),
+('2024-02-14 08:55:30','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', 8.20),
+('2024-02-16 04:31:26','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', -8.96),
+('2024-02-06 23:45:31','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', -7.88),
+('2024-02-11 01:00:35','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', -7.66),
+('2024-02-25 09:39:01','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', -7.45),
+('2024-02-14 04:04:15','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', 4.17),
+('2024-02-15 11:47:23','0x3a4FbC5Df2E1bBfDdE5c4fA7bF8dE7aC1F', 7.56),
+('2024-02-24 14:58:54','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', -1.45),
+('2024-02-18 21:17:24','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', 1.05),
+('2024-02-19 11:12:32','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', 3.67),
+('2024-03-09 16:52:14','0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c', 1.07),
+('2024-03-07 10:29:46','0x9B8aDc2eFf4cC3DdEe5f6a7B8dE9aC1F', 7.26);
+
+
+DROP TABLE IF EXISTS leave_records;
+DROP TABLE IF EXISTS employees;
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE leave_records (
+    employee_id INT REFERENCES employees(id),
+    leave_dt VARCHAR(19) NOT NULL,
+    days_taken INT NOT NULL
+);
+
+INSERT INTO employees (id, email) VALUES
+(1, 'jquartly0@macromedia.com'),
+(2, 'cchastand1@stanford.edu'),
+(3, 'lpuckrin2@creativecommons.org');
+
+INSERT INTO leave_records (employee_id, leave_dt, days_taken) VALUES
+(1, '2022-11-10 11:52:14', 4),
+(1, '2022-09-07 23:22:46', 1),
+(2, '2022-11-11 01:47:50', 7),
+(3, '2022-11-06 23:12:27', 7),
+(3, '2022-11-17 07:43:18', 7),
+(1, '2023-05-19 04:40:25', 2),
+(1, '2023-12-25 16:29:51', 7),
+(1, '2023-03-12 18:54:29', 1),
+(1, '2023-08-23 12:33:56', 6),
+(2, '2023-04-20 04:19:10', 5),
+(2, '2023-04-28 00:41:50', 7),
+(3, '2023-06-11 18:49:25', 2),
+(3, '2023-12-23 15:53:10', 7),
+(3, '2023-03-13 13:46:16', 2),
+(3, '2023-10-08 11:57:43', 2),
+(3, '2023-04-12 07:49:02', 4),
+(3, '2023-01-17 06:05:35', 6),
+(1, '2024-02-05 16:01:59', 1),
+(1, '2024-01-05 22:15:30', 7),
+(2, '2024-02-21 00:50:11', 4);
+
+
+
