@@ -262,3 +262,21 @@ INSERT INTO quarantine_urls (id, threat_id, domain_name, status, users_affected)
 (6, 2, 'google.com', 'Deleted', 864),
 (3, 2, 'facebook.com', 'Safe', 136),
 (5, 3, 'yahoo.com', 'Safe', 949);
+
+SELECT
+  n.cidr,
+  COUNT(i.network_id) AS instances,
+  CONCAT(CEIL(AVG(CAST(REPLACE(i.cpu_usage, '%', '') AS DECIMAL))), '%') AS avg_cpu_usage,
+  CONCAT(CEIL(AVG(CAST(REPLACE(i.memory_usage, '%', '') AS DECIMAL))), '%') AS avg_memory_usage,
+  CONCAT(CEIL(AVG(CAST(REPLACE(i.network_usage, '%', '') AS DECIMAL)))) AS avg_network_usage
+FROM
+  networks n
+JOIN
+  instances i ON n.id = i.network_id
+GROUP BY
+  n.cidr
+HAVING
+  MAX(CAST(REPLACE(i.cpu_usage, '%', '') AS INT)) >= 80
+ORDER BY
+  n.cidr ASC;
+
