@@ -1,0 +1,157 @@
+-- DDL for Question 47
+CREATE TABLE networks (
+    id INT PRIMARY KEY,
+    cidr VARCHAR(255)
+);
+
+CREATE TABLE instances (
+    network_id INT,
+    cpu_usage VARCHAR(255),
+    memory_usage VARCHAR(255),
+    network_usage VARCHAR(255),
+    FOREIGN KEY (network_id) REFERENCES networks(id)
+);
+
+-- DML for Question 47
+INSERT INTO networks (id, cidr) VALUES
+(1, '24.77.36.156/9'),
+(2, '74.213.138.70/7'),
+(3, '167.244.163.58/29');
+
+INSERT INTO instances (network_id, cpu_usage, memory_usage, network_usage) VALUES
+(1, '20%', '74%', '74%'),
+(3, '26%', '9%', '99%'),
+(3, '2%', '21%', '97%'),
+(1, '51%', '19%', '89%'),
+(2, '2%', '27%', '79%'),
+(3, '92%', '35%', '41%'),
+(2, '27%', '5%', '44%'),
+(3, '67%', '47%', '79%'),
+(1, '14%', '28%', '43%'),
+(3, '47%', '0%', '53%'),
+(1, '38%', '3%', '46%'),
+(2, '71%', '51%', '6%'),
+(3, '77%', '74%', '53%'),
+(3, '31%', '48%', '80%'),
+(2, '31%', '42%', '24%'),
+(1, '77%', '65%', '46%'),
+(2, '51%', '94%', '41%'),
+(3, '8%', '3%', '57%'),
+(1, '1%', '56%', '62%'),
+(2, '15%', '66%', '65%');
+
+-- DDL for Question 48
+CREATE TABLE tasks (
+    id INT PRIMARY KEY,
+    hash VARCHAR(255)
+);
+
+CREATE TABLE processes (
+    task_id INT,
+    start_dt VARCHAR(19),
+    end_dt VARCHAR(19),
+    FOREIGN KEY (task_id) REFERENCES tasks(id)
+);
+
+-- DML for Question 48
+INSERT INTO tasks (id, hash) VALUES
+(1, '208f95e0fcff792f617ade3cebf33ad9'),
+(2, '0f44a9ffead2f18a7f25425c1260fc74'),
+(3, 'dbcf54e94395c32e01ec09a5db731912');
+
+INSERT INTO processes (task_id, start_dt, end_dt) VALUES
+(1, '2023-04-20 02:01:16', '2023-04-20 02:11:35'),
+(1, '2023-04-09 15:11:10', '2023-04-09 15:26:43'),
+(1, '2023-04-07 23:41:49', '2023-04-08 00:34:10'),
+(2, '2023-04-07 23:05:47', '2023-04-08 00:00:05'),
+(2, '2023-04-19 18:39:33', '2023-04-19 18:54:57'),
+(2, '2023-04-28 13:17:11', '2023-04-28 13:24:37'),
+(2, '2023-04-16 00:13:06', '2023-04-16 01:02:39'),
+(2, '2023-04-16 15:02:26', '2023-04-16 15:58:14'),
+(2, '2023-04-27 02:23:07', '2023-04-27 02:59:13'),
+(2, '2023-04-10 23:33:47', '2023-04-11 00:09:35'),
+(2, '2023-04-16 17:29:51', '2023-04-16 18:10:22'),
+(2, '2023-04-23 12:16:01', '2023-04-23 12:48:07'),
+(3, '2023-04-01 02:25:12', '2023-04-01 02:49:26'),
+(3, '2023-04-04 03:02:43', '2023-04-04 03:42:03'),
+(3, '2023-04-10 22:42:26', '2023-04-10 23:14:42'),
+(3, '2023-04-09 17:46:12', '2023-04-09 18:10:19'),
+(3, '2023-04-25 15:09:36', '2023-04-25 15:19:54'),
+(3, '2023-04-19 14:39:52', '2023-04-19 15:21:23'),
+(3, '2023-04-12 04:22:29', '2023-04-12 04:25:10'),
+(3, '2023-04-25 07:40:26', '2023-04-25 08:01:30');
+
+
+-- DDL for Question 49
+CREATE TABLE devices (
+    id INT PRIMARY KEY,
+    score INT
+);
+
+-- DML for Question 49
+INSERT INTO devices (id, score) VALUES
+(1, 20),
+(2, 50),
+(3, 50),
+(4, 68),
+(5, 95);
+
+
+
+-- DDL for Question 50
+CREATE TABLE accounts (
+    id INT PRIMARY KEY,
+    username VARCHAR(255),
+    email VARCHAR(255)
+);
+
+CREATE TABLE tariffs (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    cost DECIMAL(4, 3)
+);
+
+CREATE TABLE readings (
+    account_id INT,
+    tariff_id INT,
+    amount SMALLINT,
+    FOREIGN KEY (account_id) REFERENCES accounts(id),
+    FOREIGN KEY (tariff_id) REFERENCES tariffs(id)
+);
+
+-- DML for Question 50
+INSERT INTO accounts (id, username, email) VALUES
+(1, 'hshillabeare0', 'rcalkin0@sourceforge.net'),
+(2, 'sdandy1', 'agaule1@businessweek.com'),
+(3, 'sgreiswood2', 'toppy2@lulu.com');
+
+INSERT INTO tariffs (id, name, cost) VALUES
+(1, 'A', 0.010),
+(2, 'B', 0.020),
+(3, 'C', 0.050),
+(4, 'D', 0.075),
+(5, 'E', 0.100);
+
+INSERT INTO readings (account_id, tariff_id, amount) VALUES
+(1, 2, 54),
+(1, 3, 19),
+(1, 3, 37),
+(1, 3, 89),
+(1, 3, 119),
+(2, 1, 12),
+(2, 1, 44),
+(2, 1, 81),
+(2, 2, 60),
+(2, 2, 164),
+(2, 2, 199),
+(2, 3, 79),
+(2, 5, 186),
+(3, 1, 31),
+(3, 1, 59),
+(3, 1, 77),
+(3, 1, 95),
+(3, 1, 110),
+(3, 1, 125),
+(3, 2, 31);
+
+
